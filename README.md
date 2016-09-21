@@ -9,6 +9,9 @@ https://github.com/cms-ttH/CommonClassifier/blob/master/README.md
 Edit Definitions.py
 python OnlyPrepareTrees.py
 
+Some things still need to be done    
+grep DANGERZONE Splitter.C
+
 2)     
 Rename output files e.g.
 ttHbb_11_182_nominal.root ->  ttHbb_11_182_nominal.root___0___200    
@@ -19,6 +22,10 @@ Splitting might not be actually necessary :(
 Put the stuff on dcache if you want to use crab     
 PATH=$PATH:/afs/desy.de/group/it/services/dcache/bin     
 dcmkdir and dcput  can be used for this
+DANGERZONE
+dcmkdir /pnfs/desy.de/cms/tier2/store/user/$USER/MEMProd_ttHbb_test     
+for i in `ls *`; do dcput -v "$i" /pnfs/desy.de/cms/tier2/store/user/$USER/MEMProd_ttHbb_test/"$i"; done
+
 
 4)
 create sample list e.g.     
