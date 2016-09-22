@@ -1,7 +1,7 @@
 #set up everything here
 
 # edit
-MaxEventsPerTree=200
+MaxEventsPerTree=999999
 # edit
 OutputDirectoryForPreparedTrees="/nfs/dust/cms/user/kelmorab/MEMInputTrees80x_ICHEP_V1"
 # edit
