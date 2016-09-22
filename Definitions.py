@@ -10,17 +10,16 @@ Categories=[
   ["all","(N_LooseLeptons==1 && N_TightLeptons==1 && N_Jets>=4 && N_BTagsM>=2)"],
 ]
 
-# better do not touch
-SystematicTreeNames=["nominal"]
+# will do spearate systematics trees if wildcars permit it
+SystematicTreeNames=["nominal"] # +["JESUP","JESDOWN"...]
 
 #edit
 MCinputDirectory="/nfs/dust/cms/user/kelmorab/samples80X_ICHEP_V1/"
 
 #edit 
 # no föavor or even/odd splitting is done
-# add additional samples for JES and JER etc.
 MCSamples=[
-	["ttHbb",["ttHbb/ttHbb*nominal*.root"],"None","False",[["foobar",1.025]],[]],
+	["ttHbb",["ttHbb/ttHbb*.root"],"None","False",[["foobar",1.025]],[]],
 	#["ttHnonbb",["ttHnonbb/ttHnonbb*nominal*.root"],"EvenOdd","False",[["lumi",1.025],["pdf",1.03]],[]],
 	#["ttbar",["ttbar_incl_All/ttbar*nominal*.root"],"EvenOdd","False",[["lumi",1.025],["pdf",1.03]],[]],
 	#["SingleT",["st_tchan","stbar_tchan","st_schan","stbar_tWchan","st_tWchan"],"EvenOdd","False",[["lumi",1.025],["pdf",1.03]],[]],
