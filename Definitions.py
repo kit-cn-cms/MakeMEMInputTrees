@@ -1,9 +1,9 @@
 #set up everything here
 
 # edit
-MaxEventsPerTree=200
+MaxEventsPerTree=999999
 # edit
-OutputDirectoryForPreparedTrees="/nfs/dust/cms/user/kelmorab/MEMInputTrees80x_ICHEP_V1"
+OutputDirectoryForPreparedTrees="/nfs/dust/cms/user/kelmorab/MEMInputTrees80x_newBTags"
 # edit
 # only the first category is used, select events you want to calc mem for
 Categories=[
@@ -11,16 +11,21 @@ Categories=[
 ]
 
 # better do not touch
-SystematicTreeNames=["nominal"]
+SystematicTreeNames=["nominal","JESUP","JESDOWN","JERUP","JERDOWN"]
 
 #edit
-MCinputDirectory="/nfs/dust/cms/user/kelmorab/samples80X_ICHEP_V1/"
+MCinputDirectory="/nfs/dust/cms/user/kelmorab/samples8019_newBTags/"
 
 #edit 
-# no föavor or even/odd splitting is done
+# no flavor or even/odd splitting is done
 # add additional samples for JES and JER etc.
 MCSamples=[
-	["ttHbb",["ttHbb/ttHbb*nominal*.root"],"None","False",[["foobar",1.025]],[]],
+	["ttHbb",["ttHbb/ttHbb*.root"],"None","False",[["foobar",1.025]],[]],
+	["ttHnonbb",["ttHnonbb/ttHnonbb*.root"],"None","False",[["foobar",1.025]],[]],
+	["ttbar",["ttbar_incl_All/ttbar*.root"],"None","False",[["foobar",1.025]],[]],
+	["el_data",["el_data/el_data*.root"],"None","False",[["foobar",1.025]],[]],
+	["mu_data",["mu_data/mu_data*.root"],"None","False",[["foobar",1.025]],[]],
+	
 	#["ttHnonbb",["ttHnonbb/ttHnonbb*nominal*.root"],"EvenOdd","False",[["lumi",1.025],["pdf",1.03]],[]],
 	#["ttbar",["ttbar_incl_All/ttbar*nominal*.root"],"EvenOdd","False",[["lumi",1.025],["pdf",1.03]],[]],
 	#["SingleT",["st_tchan","stbar_tchan","st_schan","stbar_tWchan","st_tWchan"],"EvenOdd","False",[["lumi",1.025],["pdf",1.03]],[]],

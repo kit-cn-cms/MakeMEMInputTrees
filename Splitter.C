@@ -65,21 +65,21 @@ int numcalls; //MEM integration points
 
 int nleps; //varying number of leptons
 //the following arrays should be of varying length, with buffer sizes of 2 
-float leps_pt[2];
-float leps_eta[2];
-float leps_phi[2];
-float leps_mass[2];
-float leps_charge[2];
+float lep_pt[2];
+float lep_eta[2];
+float lep_phi[2];
+float lep_mass[2];
+float lep_charge[2];
 
 int njets; //varying number of jets
 //the following arrays should be of varying length, with buffer sizes of 10
-float jets_pt[10];
-float jets_eta[10];
-float jets_phi[10];
-float jets_mass[10];
-float jets_csv[10];
-float jets_cmva[10];
-int jets_type[10]; //if jet is resolved, boosted
+float jet_pt[10];
+float jet_eta[10];
+float jet_phi[10];
+float jet_mass[10];
+float jet_csv[10];
+float jet_cmva[10];
+int jet_type[10]; //if jet is resolved, boosted
 
 float met_pt;
 float met_phi;
@@ -151,18 +151,18 @@ bool Splitter::makeNewMEMTree(TString name){
   currentMEMTree->Branch("systematic", &systematic, "systematic/I");
   currentMEMTree->Branch("met_pt", &met_pt, "met_pt/F");
   currentMEMTree->Branch("met_phi", &met_phi, "met_phi/F");
-  currentMEMTree->Branch("leps_pt", leps_pt, "leps_pt[nleps]/F");
-  currentMEMTree->Branch("leps_eta", leps_eta, "leps_eta[nleps]/F");
-  currentMEMTree->Branch("leps_phi", leps_phi, "leps_phi[nleps]/F");
-  currentMEMTree->Branch("leps_mass", leps_mass, "leps_mass[nleps]/F");
-  currentMEMTree->Branch("leps_charge", leps_charge, "leps_charge[nleps]/F");
-  currentMEMTree->Branch("jets_pt", jets_pt, "jets_pt[njets]/F");
-  currentMEMTree->Branch("jets_eta", jets_eta, "jets_eta[njets]/F");
-  currentMEMTree->Branch("jets_phi", jets_phi, "jets_phi[njets]/F");
-  currentMEMTree->Branch("jets_mass", jets_mass, "jets_mass[njets]/F");
-  currentMEMTree->Branch("jets_csv", jets_csv, "jets_csv[njets]/F");
-  currentMEMTree->Branch("jets_cmva", jets_cmva, "jets_cmva[njets]/F");
-  currentMEMTree->Branch("jets_type", jets_type, "jets_type[njets]/I");
+  currentMEMTree->Branch("lep_pt", lep_pt, "lep_pt[nleps]/F");
+  currentMEMTree->Branch("lep_eta", lep_eta, "lep_eta[nleps]/F");
+  currentMEMTree->Branch("lep_phi", lep_phi, "lep_phi[nleps]/F");
+  currentMEMTree->Branch("lep_mass", lep_mass, "lep_mass[nleps]/F");
+  currentMEMTree->Branch("lep_charge", lep_charge, "lep_charge[nleps]/F");
+  currentMEMTree->Branch("jet_pt", jet_pt, "jet_pt[njets]/F");
+  currentMEMTree->Branch("jet_eta", jet_eta, "jet_eta[njets]/F");
+  currentMEMTree->Branch("jet_phi", jet_phi, "jet_phi[njets]/F");
+  currentMEMTree->Branch("jet_mass", jet_mass, "jet_mass[njets]/F");
+  currentMEMTree->Branch("jet_csv", jet_csv, "jet_csv[njets]/F");
+  currentMEMTree->Branch("jet_cmva", jet_cmva, "jet_cmva[njets]/F");
+  currentMEMTree->Branch("jet_type", jet_type, "jet_type[njets]/I");
   currentMEMTree->SetAutoFlush();
   std::cout<<"created new tree "<<thisoutname<<" "<<currentMEMTree<<std::endl;
   
@@ -188,18 +188,18 @@ void Splitter::loop_initialize(){
   systematic = 0;
   met_pt = 0;
   met_phi = 0;
-  SetArraysTo(leps_pt, 2, 0);
-  SetArraysTo(leps_eta, 2, 0);
-  SetArraysTo(leps_phi, 2, 0);
-  SetArraysTo(leps_mass, 2, 0);
-  SetArraysTo(leps_charge, 2, 0);
-  SetArraysTo(jets_pt, 10, 0);
-  SetArraysTo(jets_eta, 10, 0);
-  SetArraysTo(jets_phi, 10, 0);
-  SetArraysTo(jets_mass, 10, 0);
-  SetArraysTo(jets_csv, 10, 0);
-  SetArraysTo(jets_cmva, 10, 0);
-  SetArraysTo(jets_type, 10, 0);
+  SetArraysTo(lep_pt, 2, 0);
+  SetArraysTo(lep_eta, 2, 0);
+  SetArraysTo(lep_phi, 2, 0);
+  SetArraysTo(lep_mass, 2, 0);
+  SetArraysTo(lep_charge, 2, 0);
+  SetArraysTo(jet_pt, 10, 0);
+  SetArraysTo(jet_eta, 10, 0);
+  SetArraysTo(jet_phi, 10, 0);
+  SetArraysTo(jet_mass, 10, 0);
+  SetArraysTo(jet_csv, 10, 0);
+  SetArraysTo(jet_cmva, 10, 0);
+  SetArraysTo(jet_type, 10, 0);
   
   Evt_Run=0;
   Evt_Lumi=0;
@@ -416,14 +416,14 @@ void Splitter::PrepareTrees(){
 	
 	int rightNJets=TMath::Min(N_Jets,maxNJets);
 	for(int ijet=0; ijet<rightNJets; ijet++){
-	  jets_phi[ijet]=Jet_Phi[ijet];
-	  jets_pt[ijet]=Jet_Pt[ijet];
-	  jets_eta[ijet]=Jet_Eta[ijet];
-	  jets_mass[ijet]=Jet_M[ijet];
-	  jets_csv[ijet]=Jet_CSV[ijet];
+	  jet_phi[ijet]=Jet_Phi[ijet];
+	  jet_pt[ijet]=Jet_Pt[ijet];
+	  jet_eta[ijet]=Jet_Eta[ijet];
+	  jet_mass[ijet]=Jet_M[ijet];
+	  jet_csv[ijet]=Jet_CSV[ijet];
 	  //DANGERZONE
-	  jets_cmva[ijet]=0;
-	  jets_type[ijet]=0;
+	  jet_cmva[ijet]=0;
+	  jet_type[ijet]=0;
 	  //get CMVA 
 	  // find out what to do with boosted events
 	}
@@ -432,18 +432,18 @@ void Splitter::PrepareTrees(){
 	// only works for SL
 	if(N_TightElectrons+N_TightMuons !=1){std::cout<<"WARNING Not an SL event !!!!!!"<<std::endl; }
 	for(int ilep=0;ilep<N_TightElectrons;ilep++){
-	  leps_charge[ilep]=Electron_Charge[ilep];
-	  leps_pt[ilep]=Electron_Pt[ilep];
-	  leps_eta[ilep]=Electron_Eta[ilep];
-	  leps_phi[ilep]=Electron_Phi[ilep];
-	  leps_mass[ilep]=Electron_M[ilep];
+	  lep_charge[ilep]=Electron_Charge[ilep];
+	  lep_pt[ilep]=Electron_Pt[ilep];
+	  lep_eta[ilep]=Electron_Eta[ilep];
+	  lep_phi[ilep]=Electron_Phi[ilep];
+	  lep_mass[ilep]=Electron_M[ilep];
 	}
 	for(int ilep=0;ilep<N_TightMuons;ilep++){
-	  leps_charge[ilep]=Muon_Charge[ilep];
-	  leps_pt[ilep]=Muon_Pt[ilep];
-	  leps_eta[ilep]=Muon_Eta[ilep];
-	  leps_phi[ilep]=Muon_Phi[ilep];
-	  leps_mass[ilep]=Muon_M[ilep];
+	  lep_charge[ilep]=Muon_Charge[ilep];
+	  lep_pt[ilep]=Muon_Pt[ilep];
+	  lep_eta[ilep]=Muon_Eta[ilep];
+	  lep_phi[ilep]=Muon_Phi[ilep];
+	  lep_mass[ilep]=Muon_M[ilep];
 	}
 	// fill tree
         currentMEMTree->Fill();
