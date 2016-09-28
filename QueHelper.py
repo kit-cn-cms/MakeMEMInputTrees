@@ -74,9 +74,9 @@ class QueHelper:
           "#!/bin/bash\n",
           ". /etc/profile.d/modules.sh\n",
           "module use -a /afs/desy.de/group/cms/modulefiles/\n",
-          "module load cmssw/slc6_amd64_gcc491\n",
+          "module load cmssw/slc6_amd64_gcc530\n",
           "export VO_CMS_SW_DIR=/cvmfs/cms.cern.ch\n",
-          "export SCRAM_ARCH=slc6_amd64_gcc491\n",
+          "export SCRAM_ARCH=slc6_amd64_gcc530\n",
           "source $VO_CMS_SW_DIR/cmsset_default.sh\n",
           "cd "+self.CMSSWBASE+"/src\n",
           "eval `scram runtime -sh`\n"

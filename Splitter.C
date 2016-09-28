@@ -65,21 +65,21 @@ int numcalls; //MEM integration points
 
 int nleps; //varying number of leptons
 //the following arrays should be of varying length, with buffer sizes of 2 
-float lep_pt[2];
-float lep_eta[2];
-float lep_phi[2];
-float lep_mass[2];
-float lep_charge[2];
+float lep_pt[100];
+float lep_eta[100];
+float lep_phi[100];
+float lep_mass[100];
+float lep_charge[100];
 
 int njets; //varying number of jets
 //the following arrays should be of varying length, with buffer sizes of 10
-float jet_pt[10];
-float jet_eta[10];
-float jet_phi[10];
-float jet_mass[10];
-float jet_csv[10];
-float jet_cmva[10];
-int jet_type[10]; //if jet is resolved, boosted
+float jet_pt[100];
+float jet_eta[100];
+float jet_phi[100];
+float jet_mass[100];
+float jet_csv[100];
+float jet_cmva[100];
+int jet_type[100]; //if jet is resolved, boosted
 
 float met_pt;
 float met_phi;
@@ -93,28 +93,28 @@ int Evt_ID;
 int N_TightElectrons;
 int N_TightMuons;
 
-float Muon_E[10];
-float Muon_M[10];
-float Muon_Pt[10];
-float Muon_Eta[10];
-float Muon_Phi[10];
-float Muon_Charge[10];
-float Electron_E[10];
-float Electron_M[10];
-float Electron_Pt[10];
-float Electron_Eta[10];
-float Electron_Phi[10];
-float Electron_Charge[10];
+float Muon_E[100];
+float Muon_M[100];
+float Muon_Pt[100];
+float Muon_Eta[100];
+float Muon_Phi[100];
+float Muon_Charge[100];
+float Electron_E[100];
+float Electron_M[100];
+float Electron_Pt[100];
+float Electron_Eta[100];
+float Electron_Phi[100];
+float Electron_Charge[100];
 
 int N_Jets;
 
-float Jet_E[10];
-float Jet_M[10];
-float Jet_Pt[10];
-float Jet_Eta[10];
-float Jet_Phi[10];
-float Jet_CMVA[10];
-float Jet_CSV[10];
+float Jet_E[100];
+float Jet_M[100];
+float Jet_Pt[100];
+float Jet_Eta[100];
+float Jet_Phi[100];
+float Jet_CMVA[100];
+float Jet_CSV[100];
 
 const int maxNJets=10;
 
@@ -151,18 +151,18 @@ bool Splitter::makeNewMEMTree(TString name){
   currentMEMTree->Branch("systematic", &systematic, "systematic/I");
   currentMEMTree->Branch("met_pt", &met_pt, "met_pt/F");
   currentMEMTree->Branch("met_phi", &met_phi, "met_phi/F");
-  currentMEMTree->Branch("lep_pt", lep_pt, "lep_pt[nleps]/F");
-  currentMEMTree->Branch("lep_eta", lep_eta, "lep_eta[nleps]/F");
-  currentMEMTree->Branch("lep_phi", lep_phi, "lep_phi[nleps]/F");
-  currentMEMTree->Branch("lep_mass", lep_mass, "lep_mass[nleps]/F");
-  currentMEMTree->Branch("lep_charge", lep_charge, "lep_charge[nleps]/F");
-  currentMEMTree->Branch("jet_pt", jet_pt, "jet_pt[njets]/F");
-  currentMEMTree->Branch("jet_eta", jet_eta, "jet_eta[njets]/F");
-  currentMEMTree->Branch("jet_phi", jet_phi, "jet_phi[njets]/F");
-  currentMEMTree->Branch("jet_mass", jet_mass, "jet_mass[njets]/F");
-  currentMEMTree->Branch("jet_csv", jet_csv, "jet_csv[njets]/F");
-  currentMEMTree->Branch("jet_cmva", jet_cmva, "jet_cmva[njets]/F");
-  currentMEMTree->Branch("jet_type", jet_type, "jet_type[njets]/I");
+  currentMEMTree->Branch("lep_pt", &lep_pt, "lep_pt[nleps]/F");
+  currentMEMTree->Branch("lep_eta", &lep_eta, "lep_eta[nleps]/F");
+  currentMEMTree->Branch("lep_phi", &lep_phi, "lep_phi[nleps]/F");
+  currentMEMTree->Branch("lep_mass", &lep_mass, "lep_mass[nleps]/F");
+  currentMEMTree->Branch("lep_charge", &lep_charge, "lep_charge[nleps]/F");
+  currentMEMTree->Branch("jet_pt", &jet_pt, "jet_pt[njets]/F");
+  currentMEMTree->Branch("jet_eta", &jet_eta, "jet_eta[njets]/F");
+  currentMEMTree->Branch("jet_phi", &jet_phi, "jet_phi[njets]/F");
+  currentMEMTree->Branch("jet_mass", &jet_mass, "jet_mass[njets]/F");
+  currentMEMTree->Branch("jet_csv", &jet_csv, "jet_csv[njets]/F");
+  currentMEMTree->Branch("jet_cmva", &jet_cmva, "jet_cmva[njets]/F");
+  currentMEMTree->Branch("jet_type", &jet_type, "jet_type[njets]/I");
   currentMEMTree->SetAutoFlush();
   std::cout<<"created new tree "<<thisoutname<<" "<<currentMEMTree<<std::endl;
   
@@ -188,18 +188,18 @@ void Splitter::loop_initialize(){
   systematic = 0;
   met_pt = 0;
   met_phi = 0;
-  SetArraysTo(lep_pt, 2, 0);
-  SetArraysTo(lep_eta, 2, 0);
-  SetArraysTo(lep_phi, 2, 0);
-  SetArraysTo(lep_mass, 2, 0);
-  SetArraysTo(lep_charge, 2, 0);
-  SetArraysTo(jet_pt, 10, 0);
-  SetArraysTo(jet_eta, 10, 0);
-  SetArraysTo(jet_phi, 10, 0);
-  SetArraysTo(jet_mass, 10, 0);
-  SetArraysTo(jet_csv, 10, 0);
-  SetArraysTo(jet_cmva, 10, 0);
-  SetArraysTo(jet_type, 10, 0);
+  SetArraysTo(lep_pt, 100, 0);
+  SetArraysTo(lep_eta, 100, 0);
+  SetArraysTo(lep_phi, 100, 0);
+  SetArraysTo(lep_mass, 100, 0);
+  SetArraysTo(lep_charge, 100, 0);
+  SetArraysTo(jet_pt, 100, 0);
+  SetArraysTo(jet_eta, 100, 0);
+  SetArraysTo(jet_phi, 100, 0);
+  SetArraysTo(jet_mass, 100, 0);
+  SetArraysTo(jet_csv, 100, 0);
+  SetArraysTo(jet_cmva, 100, 0);
+  SetArraysTo(jet_type, 100, 0);
   
   Evt_Run=0;
   Evt_Lumi=0;
@@ -210,25 +210,25 @@ void Splitter::loop_initialize(){
   Evt_Phi_MET=0.0;
   Evt_Pt_MET=0.0;
   
-    SetArraysTo(Muon_E, 10, 0);
-    SetArraysTo(Muon_M, 10, 0);
-    SetArraysTo(Muon_Pt, 10, 0);
-    SetArraysTo(Muon_Eta, 10, 0);
-    SetArraysTo(Muon_Phi, 10, 0);
-    SetArraysTo(Muon_Charge, 10, 0);
-    SetArraysTo(Electron_E, 10, 0);
-    SetArraysTo(Electron_M, 10, 0);
-    SetArraysTo(Electron_Pt, 10, 0);
-    SetArraysTo(Electron_Eta, 10, 0);
-    SetArraysTo(Electron_Phi, 10, 0);
-    SetArraysTo(Electron_Charge, 10, 0);
-    SetArraysTo(Jet_E, 10, 0);
-    SetArraysTo(Jet_M, 10, 0);
-    SetArraysTo(Jet_Pt, 10, 0);
-    SetArraysTo(Jet_Eta, 10, 0);
-    SetArraysTo(Jet_Phi, 10, 0);
-    SetArraysTo(Jet_CMVA, 10, 0);
-    SetArraysTo(Jet_CSV, 10, 0);
+    SetArraysTo(Muon_E, 100, 0);
+    SetArraysTo(Muon_M, 100, 0);
+    SetArraysTo(Muon_Pt, 100, 0);
+    SetArraysTo(Muon_Eta, 100, 0);
+    SetArraysTo(Muon_Phi, 100, 0);
+    SetArraysTo(Muon_Charge, 100, 0);
+    SetArraysTo(Electron_E, 100, 0);
+    SetArraysTo(Electron_M, 100, 0);
+    SetArraysTo(Electron_Pt, 100, 0);
+    SetArraysTo(Electron_Eta, 100, 0);
+    SetArraysTo(Electron_Phi, 100, 0);
+    SetArraysTo(Electron_Charge, 100, 0);
+    SetArraysTo(Jet_E, 100, 0);
+    SetArraysTo(Jet_M, 100, 0);
+    SetArraysTo(Jet_Pt, 100, 0);
+    SetArraysTo(Jet_Eta, 100, 0);
+    SetArraysTo(Jet_Phi, 100, 0);
+    SetArraysTo(Jet_CMVA, 100, 0);
+    SetArraysTo(Jet_CSV, 100, 0);
 
 }
 
@@ -393,6 +393,11 @@ void Splitter::PrepareTrees(){
     if(ievt%100==0)std::cout<<"at event "<<ievt<<std::endl;
     if(ievt%100==0)std::cout<<"array cross check "<<Jet_Pt[0]<<" "<<Jet_CSV[1]<<std::endl;
     
+    std::cout<<"event "<<ievt<<std::endl;
+    for(int ijet=0; ijet<10; ijet++){ 
+	  std::cout<<event<<" preGet "<<ijet<<" "<<jet_eta[ijet]<<" "<<Jet_Eta[ijet]<<std::endl;
+	}
+	
     inTree->GetEntry(ievt);
     //only do selected events
     if(CatFormulas.at(0)->EvalInstance()!=0){        
@@ -402,7 +407,8 @@ void Splitter::PrepareTrees(){
 	met_phi=Evt_Phi_MET;
 	met_pt=Evt_Pt_MET;
 	nleps=N_TightElectrons+N_TightMuons;
-	njets=N_Jets;
+	int rightNJets=TMath::Min(N_Jets,maxNJets);
+	njets=rightNJets;
 	//DANGERZONE
 	hypothesis=0;
 	if (Systematic=="nominal"){systematic=0;}		 
@@ -414,11 +420,17 @@ void Splitter::PrepareTrees(){
 	numcalls=12; //?
 	//DANGERZONE
 	
-	int rightNJets=TMath::Min(N_Jets,maxNJets);
+	
+	for(int ijet=0; ijet<10; ijet++){ 
+	  std::cout<<event<<" prefill "<<ijet<<" "<<jet_eta[ijet]<<" "<<Jet_Eta[ijet]<<std::endl;
+	}
 	for(int ijet=0; ijet<rightNJets; ijet++){
 	  jet_phi[ijet]=Jet_Phi[ijet];
 	  jet_pt[ijet]=Jet_Pt[ijet];
 	  jet_eta[ijet]=Jet_Eta[ijet];
+	  
+	  if (jet_eta[ijet]>3 or Jet_Eta[ijet]>3){std::cout<<"prob "<<event<<" "<<njets<<" "<<ijet<<" "<<jet_eta[ijet]<<" "<<Jet_Eta[ijet]<<std::endl;}
+	  
 	  jet_mass[ijet]=Jet_M[ijet];
 	  jet_csv[ijet]=Jet_CSV[ijet];
 	  //DANGERZONE
