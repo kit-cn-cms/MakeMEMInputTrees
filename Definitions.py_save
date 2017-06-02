@@ -3,7 +3,7 @@
 # edit
 MaxEventsPerTree=999999
 # edit
-OutputDirectoryForPreparedTrees="/nfs/dust/cms/user/kelmorab/MEMInputTrees80x_ICHEP_V5dl"
+OutputDirectoryForPreparedTrees="/nfs/dust/cms/user/kelmorab/MEMInputTrees80x_ICHEP_V3newttsl"
 # edit
 # only the first category is used, select events you want to calc mem for
 Categories=[
@@ -14,7 +14,7 @@ Categories=[
 SystematicTreeNames=["nominal","JESUP","JESDOWN","JERUP","JERDOWN"]
 
 #edit
-MCinputDirectory="/nfs/dust/cms/user/kelmorab/samples8019_ICHEP_V5DL/"
+MCinputDirectory="/nfs/dust/cms/user/kelmorab/samples8019_ICHEP_V5newttsl/"
 
 #edit 
 # no flavor or even/odd splitting is done
@@ -25,7 +25,8 @@ MCSamples=[
 	#["Tranche3_ttHbb",["Tranche3_ttHbb/Tranche3_ttHbb*.root"],"None","False",[["foobar",1.025]],[]],
 	#["Tranche3_ttHnonbb",["Tranche3_ttHnonbb/Tranche3_ttHnonbb*.root"],"None","False",[["foobar",1.025]],[]],
 	#["ttbar_incl_All",["ttbar_incl_All/ttbar*.root"],"None","False",[["foobar",1.025]],[]],
-	
+	["Tranche3_ttbar_SL",["Tranche3_ttbar_SL/Tranche3_ttbar_SL*.root"],"None","False",[["foobar",1.025]],[]],
+
 	#["ttbar_SL",["ttbar_SL/ttbar_SL*.root"],"None","False",[["foobar",1.025]],[]],
 	#["scaleDown_ttbar_SL",["scaleDown_ttbar_SL/scaleDown_ttbar_SL*.root"],"None","False",[["foobar",1.025]],[]],
 	#["scaleDown_ttbar_incl",["scaleDown_ttbar_incl/scaleDown_ttbar_incl*.root"],"None","False",[["foobar",1.025]],[]],
@@ -53,10 +54,7 @@ MCSamples=[
 	#["st_tWchan",["st_tWchan/st_tWchan*.root"],"None","False",[["foobar",1.025]],[]],
 	#["stbar_tWchan",["stbar_tWchan/stbar_tWchan*.root"],"None","False",[["foobar",1.025]],[]],
 	
-	["Tranche3_ttbar_DL",["Tranche3_ttbar_DL/Tranche3_ttbar_DL*.root"],"None","False",[["foobar",1.025]],[]],
-	#["scaleDown_ttbar_DL",["scaleDown_ttbar_DL/scaleDown_ttbar_DL*.root"],"None","False",[["foobar",1.025]],[]],
-	#["scaleUp_ttbar_DL",["scaleUp_ttbar_DL/scaleUp_ttbar_DL*.root"],"None","False",[["foobar",1.025]],[]],
-	#["ttbar_DL",["ttbar_DL/ttbar_DL*.root"],"None","False",[["foobar",1.025]],[]],
+	#["WJets-HT-200-400",["WJets-HT-200-400/WJets-HT-200-400*.root"],"None","False",[["foobar",1.025]],[]],
 
 ]
 

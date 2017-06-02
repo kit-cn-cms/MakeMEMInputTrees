@@ -107,10 +107,6 @@ float Electron_Phi[100];
 float Electron_Charge[100];
 
 int N_Jets;
-int N_BTagsM;
-int Triggered_HLT_Ele27_eta2p1_WPTight_Gsf_vX;
-int Triggered_HLT_IsoMu22_vX;
-int Triggered_HLT_IsoTkMu22_vX;
 
 float Jet_E[100];
 float Jet_M[100];
@@ -119,7 +115,6 @@ float Jet_Eta[100];
 float Jet_Phi[100];
 float Jet_CMVA[100];
 float Jet_CSV[100];
-
 
 const int maxNJets=10;
 
@@ -212,12 +207,8 @@ void Splitter::loop_initialize(){
   N_TightElectrons=0;
   N_TightMuons=0;
   N_Jets=0;
-  N_BTagsM=0;
   Evt_Phi_MET=0.0;
   Evt_Pt_MET=0.0;
-  Triggered_HLT_Ele27_eta2p1_WPTight_Gsf_vX=0;
-  Triggered_HLT_IsoMu22_vX=0;
-  Triggered_HLT_IsoTkMu22_vX=0;
   
     SetArraysTo(Muon_E, 100, 0);
     SetArraysTo(Muon_M, 100, 0);
@@ -345,11 +336,6 @@ Splitter::Splitter(){
   inTree->SetBranchAddress("Jet_Eta",&Jet_Eta);
   inTree->SetBranchAddress("Jet_Phi",&Jet_Phi);
   inTree->SetBranchAddress("Jet_CSV",&Jet_CSV);
-  inTree->SetBranchAddress("N_BTagsM",&N_BTagsM);
-    inTree->SetBranchAddress("Triggered_HLT_Ele27_eta2p1_WPTight_Gsf_vX",&Triggered_HLT_Ele27_eta2p1_WPTight_Gsf_vX);
-  inTree->SetBranchAddress("Triggered_HLT_IsoMu22_vX",&Triggered_HLT_IsoMu22_vX);
-  inTree->SetBranchAddress("Triggered_HLT_IsoTkMu22_vX",&Triggered_HLT_IsoTkMu22_vX);
-
 //   inTree->SetBranchAddress("Evt_Run",&Jet_CMVA); //DANGERZONE
   inTree->SetBranchAddress("Evt_Pt_MET",&Evt_Pt_MET);
   inTree->SetBranchAddress("Evt_Phi_MET",&Evt_Phi_MET);
@@ -424,8 +410,7 @@ void Splitter::PrepareTrees(){
 	int rightNJets=TMath::Min(N_Jets,maxNJets);
 	njets=rightNJets;
 	//DANGERZONE
-	hypothesis=-1;
-	if(N_BTagsM<=2){hypothesis=-2;}
+	hypothesis=0;
 	if (Systematic=="nominal"){systematic=0;}		 
 	else if (Systematic=="JESUP"){systematic=1;}		 
 	else if (Systematic=="JESDOWN"){systematic=2;}	 
@@ -472,15 +457,8 @@ void Splitter::PrepareTrees(){
 	  lep_phi[ilep]=Muon_Phi[ilep];
 	  lep_mass[ilep]=Muon_M[ilep];
 	}
-	//make TriggerSelection
-	//DANGERZONE
-	bool hasTriggered=false;
-	if(N_TightElectrons==1 and Triggered_HLT_Ele27_eta2p1_WPTight_Gsf_vX==1){hasTriggered=true;}
-	else if(N_TightMuons==1 and (Triggered_HLT_IsoMu22_vX==1 or Triggered_HLT_IsoTkMu22_vX==1)){hasTriggered=true;} 
 	// fill tree
-	if(hasTriggered==true){
         currentMEMTree->Fill();
-	}
         eventsWritten+=1;
     }//end cat eval
     if(eventsWritten==maxEventsPerTree){
